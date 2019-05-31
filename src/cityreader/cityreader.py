@@ -40,8 +40,8 @@ def cityreader(cities=[]):
 cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
-for c in cities:
-    print(c)
+#for c in cities:
+#    print(c)
 
 # STRETCH GOAL!
 #
@@ -76,10 +76,48 @@ for c in cities:
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
 	# within will hold the cities that fall within the specified region
-	within = []
+    print(f"{lat1},{lon1},{lat2},{lon2}")
+    within = []
 
-	# TODO Ensure that the lat and lon valuse are all floats
+    temp = 0
+
+    if lat1 >= lat2:
+        pass
+    else:
+        temp = lat1
+        lat1 = lat2
+        lat2 = temp
+
+    if lon1 >= lon2:
+        pass
+    else:
+        temp = lon1
+        lon1 = lon2
+        lon2 = temp
+	
+	# TODO Ensure that the lat and lon values are all floats
 	# Go through each city and check to see if it falls within 
 	# the specified coordinates.
 
-	return within
+    for c in cities:
+        if (c.lat <= lat1 and c.lat >= lat2 and c.lon <= lon1 and c.lon >= lon2):
+            within.append(c)
+    print(within)
+    return within
+
+while True:
+    coords1 = input("Enter the first set of lat/lon cooridnates: ").split(" ")
+    print(coords1)
+    coords2 = input("Enter the second set of lat/lon cooridnates: ").split(" ")
+    print(coords2)
+    lat1 = float(coords1[0])
+    lon1 = float(coords1[1])
+    lat2 = float(coords2[0])
+    lon2 = float(coords2[1])
+    if type(lat1) == float:
+        cityreader_stretch(lat1, lon1, lat2, lon2, cities)
+        break
+    else:
+	    print("The coordinates provided are not floats")
+
+
