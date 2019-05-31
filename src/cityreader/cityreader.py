@@ -1,4 +1,5 @@
 import csv
+from helper_functions import cityreader_stretch
 # Create a class to hold a city location. Call the class "City". It should have
 # fields for name, lat and lon (representing latitude and longitude).
 
@@ -74,50 +75,16 @@ cityreader(cities)
 
 # TODO Get latitude and longitude values from the user
 
-def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
-	# within will hold the cities that fall within the specified region
-    print(f"{lat1},{lon1},{lat2},{lon2}")
-    within = []
-
-    temp = 0
-
-    if lat1 >= lat2:
-        pass
-    else:
-        temp = lat1
-        lat1 = lat2
-        lat2 = temp
-
-    if lon1 >= lon2:
-        pass
-    else:
-        temp = lon1
-        lon1 = lon2
-        lon2 = temp
-	
-	# TODO Ensure that the lat and lon values are all floats
-	# Go through each city and check to see if it falls within 
-	# the specified coordinates.
-
-    for c in cities:
-        if (c.lat <= lat1 and c.lat >= lat2 and c.lon <= lon1 and c.lon >= lon2):
-            within.append(c)
-    print(within)
-    return within
-
+# Main loop
 while True:
     coords1 = input("Enter the first set of lat/lon cooridnates: ").split(" ")
-    print(coords1)
+    if coords1[0] == "q": break
     coords2 = input("Enter the second set of lat/lon cooridnates: ").split(" ")
-    print(coords2)
-    lat1 = float(coords1[0])
-    lon1 = float(coords1[1])
-    lat2 = float(coords2[0])
-    lon2 = float(coords2[1])
-    if type(lat1) == float:
-        cityreader_stretch(lat1, lon1, lat2, lon2, cities)
-        break
+    if coords2[0] == "q": break
+
+    if len(coords1) == 2 and len(coords2) == 2:
+        cityreader_stretch(coords1[0], coords1[1], coords2[0], coords2[1], cities)
     else:
-	    print("The coordinates provided are not floats")
+	    print("The coordinates provided are not valid. Please try again.")
 
 
